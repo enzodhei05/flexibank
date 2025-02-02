@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commander une carte{% endblock %}
+
+{% block body %}
+
+<style>
+h1 {
+    text-align: center;
+    color: #007BFF;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.alert {
+    margin-bottom: 20px;
+}
+
+/* Formulaire */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color:black;
+    color:white;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 15px; /* Augmenter l'espace entre le label et l'input */
+}
+
+input, select, button {
+    padding: 8px 12px;  /* Réduire le padding pour rendre les boutons plus petits */
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    margin-bottom: 15px; /* Ajouter de l'espace entre les champs */
+}
+
+input:focus, select:focus, button:focus {
+    border-color: #007BFF;
+}
+
+
+button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: blue;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Messages flash */
+.alert-success {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        margin: 20px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .form-row input,
+    .form-row select,
+    .form-row button {
+        font-size: 0.9rem;   
+    }
+}
+</style>
+    <div class="container mt-4">
+        <h1>Commander une carte bancaire</h1>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+
+        {{ form_start(form) }}
+            <div class="form-row">
+                <label for="{{ form.customerName.vars.id }}">Nom du client</label>
+                {{ form_widget(form.customerName) }}
+            </div>
+            <div class="form-row">
+                <label for="{{ form.customerEmail.vars.id }}">Email du client</label>
+                {{ form_widget(form.customerEmail) }}
+            </div>
+            <div class="form-row">
+                <label for="{{ form.cardCategory.vars.id }}">Catégorie de carte</label>
+                {{ form_widget(form.cardCategory) }}
+            </div>
+            <div class="form-row">
+                {{ form_widget(form.submit, {'label': 'Commander la carte'}) }}
+            </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

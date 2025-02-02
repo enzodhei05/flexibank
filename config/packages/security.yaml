@@ -1,0 +1,48 @@
+security:
+    # Utilisation de l'encodage automatique des mots de passe
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+
+    # Fournisseur de l'utilisateur dans la base de données
+    providers:
+        users_in_database:
+            entity:
+                class: App\Entity\User
+                property: email  # Assurez-vous d'utiliser la propriété correcte (email ou username)
+
+    firewalls:
+        # Désactivation de la sécurité pour certaines routes de développement
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        # Configuration du firewall principal
+        main:
+            lazy: true
+            provider: users_in_database
+            
+            # Configuration du formulaire de connexion
+            
+            # Configuration de la déconnexion
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
+
+            # Configuration "remember me" pour la connexion persistante
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800  # Durée de vie en secondes (1 semaine ici)
+                path: /
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                enable_csrf: true
+                # always_remember_me: true  # Décommentez pour toujours activer le "remember me"
+
+    # Contrôle d'accès pour les différentes routes
+
+    
+
+    
+    

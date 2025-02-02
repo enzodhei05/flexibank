@@ -1,0 +1,201 @@
+<style>
+    body {
+        background-color: #1e1e1e;
+        color: #f2f2f2;
+        font-family: 'Arial', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .wrapper {
+        display: flex;
+        width: 80%;
+        max-width: 1200px;
+        background-color: #1e1e1e;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    .left-section {
+        flex: 1;
+        padding: 40px;
+        background-color: #1e1e1e;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .left-section h1 {
+        font-size: 2.1em;
+        color: #f2f2f2;
+        margin: 0;
+        opacity: 0; /* Initial state for animation */
+        transform: translateY(20px); /* Slight offset for animation */
+        animation: fadeInUp 1.5s ease-out forwards; /* Trigger animation */
+    }
+
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .right-section {
+        flex: 1;
+        padding: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+        padding: 14px;
+        margin-bottom: 20px;
+        border: 1px solid #444;
+        border-radius: 8px;
+        background-color: #2b2b2b;
+        color: #ddd;
+        font-size: 1.1em;
+        transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+        border-color: #6699ff;
+        background-color: #333;
+        outline: none;
+    }
+
+    input::placeholder {
+        color: #aaa;
+        font-size: 1em;
+        font-style: italic;
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 8px;
+        background-color: #0059ff;
+        color: #fff;
+        font-size: 1.2em;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+        background-color: #3a6fdb;
+        transform: translateY(-3px);
+    }
+
+    button:active {
+        background-color: #2a5cc2;
+        transform: translateY(1px);
+    }
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Ajoute un espacement entre la case à cocher et le label */
+    margin-top: 20px; /* Maintient un espace au-dessus de la case à cocher */
+}
+
+.checkbox label {
+    margin: 0; /* Supprime tout espacement par défaut autour du label */
+    color: #ddd; /* Harmonise la couleur avec le reste du formulaire */
+    font-size: 1em; /* Uniformise la taille du texte */
+}
+
+
+    .alert {
+        color: #e74c3c;
+        background-color: rgba(231, 76, 60, 0.1);
+        border: 1px solid #e74c3c;
+        padding: 12px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+    }
+
+    .form-title {
+    color: #f2f2f2; /* Couleur blanche pour correspondre au design global */
+    font-size: 1.5em; /* Taille légèrement plus grande */
+    margin-bottom: 20px; /* Espacement en dessous */
+    text-align: center; /* Centré */
+}
+
+.header {
+    position: absolute;
+    top: 25px;
+    left: 35px;
+}
+
+.logo {
+    color: #f2f2f2; /* Couleur blanche */
+    font-size: 1.8em; /* Taille du texte */
+    font-weight: bold; /* Gras pour un effet de logo */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Légère ombre pour le style */
+    margin: 0;
+}
+</style>
+
+<div class="header">
+    <h1 class="logo">Flexibank</h1>
+</div>
+
+<div class="wrapper">
+    <div class="left-section">
+        <h1>Bon retour parmi nous !</h1>
+    </div>
+    <div class="right-section">
+        <div class="container">
+            <form method="post">
+                {% if error %}
+                    <div class="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {% if app.user %}
+                    <div class="mb-3">
+                        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    </div>
+                {% endif %}
+
+                <h2 class="form-title">Connectez-vous</h2>
+
+
+                <input type="email" value="{{ last_username }}" name="_username" id="username" placeholder="Email" autocomplete="email" required autofocus>
+
+                <input type="password" name="_password" id="password" placeholder="Password" autocomplete="current-password" required>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <button type="submit">
+                    Sign in
+                </button>
+
+                <div class="checkbox">
+                <input type="checkbox" name="_remember_me" id="_remember_me">
+                <label for="_remember_me">Se souvenir de moi</label>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

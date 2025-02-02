@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Suivre ma demande de carte{% endblock %}
+
+{% block body %}
+
+<style>
+
+body{
+    color:white;
+}
+h2 {
+    text-align: center;
+    color:white;
+    margin-bottom: 20px;
+}
+
+.order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #3d3d3d;
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.order-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.order-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.order-number {
+    font-size: 16px;
+    font-weight: bold;
+    color: #3c58b2;
+    margin: 0;
+    margin-right:50px;
+}
+
+.order-date {
+    font-size: 14px;
+    color: #c0c0c0;
+    margin: 5px 0 0 0;
+}
+
+.order-status {
+    background-color: #ffc107;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+</style>
+
+    <div class="container mt-4">
+        <h2>Suivre ma demande de carte</h2>
+
+        {% if cardOrders is empty %}
+            <p class="no-request">Vous n'avez pas encore fait de demande de carte.</p>
+        {% else %}
+            <div class="order-list">
+                {% for order in cardOrders %}
+                    <div class="order-item">
+                        <div class="order-info">
+                            <p class="order-number">Numéro de demande : {{ order.id }}</p>
+                            <p class="order-date">Date de demande : {{ order.createdAt|date('d/m/Y H:i') }}</p>
+                        </div>
+                        <div class="order-status">
+                            <span>En cours</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
