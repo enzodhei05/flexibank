@@ -1,0 +1,16 @@
+{# templates/card_order/order.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Commander une carte bancaire
+{% endblock %}
+
+{% block body %}
+  <h1>Commander une carte bancaire</h1>
+
+  {{ form_start(form) }}
+  {{ form_row(form.userEmail) }}
+  {{ form_row(form.cardType) }}
+  {{ form_row(form.submit) }}
+  {{ form_end(form) }}
+{% endblock %}

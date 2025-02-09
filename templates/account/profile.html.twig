@@ -3,6 +3,7 @@
 {% block title %}Mon profil{% endblock %}
 
 {% block body %}
+
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
 <style>
@@ -17,33 +18,38 @@ body {
 
 nav {
     background-color: #002d72; /* Fond blanc pour contraster avec le fond général */
-    padding: 30px 30px;
+    padding: 40px 30px;
     color: #333333; /* Gris foncé pour une meilleure lisibilité */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Légère ombre pour séparation */
     display: flex;
     align-items: center;
+    position: relative;
     justify-content: space-between;
 }
 
 .back-button {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        background-color: #002d72;
-        color: white;
-        padding: 10px 15px;
-        text-decoration: none;
-        border-radius: 5px;
-        font-size: 1em;
-        font-weight: bold;
-    }
-    .back-button:hover {
-        background-color: #0056b3;
-    }
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #002d72;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
 
 .container {
-    max-width: 1550px;
-    margin-top: 10px;
+    width: 100%; /* Prend toute la largeur */
+    max-width: 100%; /* Évite une limite sur les grands écrans */
+    min-height: 100vh;
+    padding: 20px; /* Pour éviter que le contenu colle aux bords */
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
 }
 
 .profile-container {
@@ -211,27 +217,63 @@ nav {
     margin-bottom: 20px; /* Ajoute un espacement avec le reste de la section */
 }
 
-.text-center {
+.btn-professional {
+    padding: 6px 14px; /* Boutons plus petits */
+    font-size: 14px; /* Taille de police réduite */
+    margin-top:-8px;
+    font-weight: 600;
+    border-radius: 8px;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-professional-danger {
+    background-color: #e74c3c; /* Rouge clair */
+    color: white;
+    border: 1px solid #e74c3c;
+}
+
+.btn-professional-danger:hover {
+    background-color: #c0392b;
+    border-color: #c0392b;
+}
+
+.btn-professional-dark {
+    background-color: #333;
+    color: white;
+    border: 1px solid #333;
+}
+
+.btn-professional-dark:hover {
+    background-color: #555;
+    border-color: #555;
+}
+
+.text-left {
     display: flex;
-    justify-content: center; /* Centrer les boutons */
-    gap: 10px; /* Espace entre les boutons */
-    margin-right:1200px;
+    justify-content: flex-start; /* Aligne les boutons à gauche */
+    gap: 15px; /* Espacement entre les boutons */
+    margin-top: 20px;
 }
 
 nav h1 {
-    margin: 0;
+    position: absolute;
+    right: 80px; /* Distance du bord droit */
+    top: 20%;
+    transform: translateY(-50%);
     font-size: 28px;
-    margin-top:-5px;
-    margin-left:1300px;
     font-weight: bold;
-    color: #007BFF; /* Bleu pour mettre en avant le titre */
+    color: #007BFF;
 }
 </style>
 
 <nav>
-<a href="javascript:history.back()" class="back-button">
+<a href="{{ path('app_home') }}" class="back-button">
     ← Retour
 </a>
+
 <h1>Flexibank</h1>
 </nav>
 
@@ -260,25 +302,24 @@ nav h1 {
     <div class="profile-separator"></div>
 
     <!-- Informations Personnelles -->
- <div class="info-section">
-    <div class="profile-actions-right">
-        <a href="{{ path('account_edit') }}" class="btn btn-primary" style="text-decoration:none;color:#0059ff;">Modifier mes informations</a>
-        <a href="{{ path('account_change_password') }}" class="btn btn-secondary" style="text-decoration:none;color:#0059ff;">Changer mon mot de passe</a>
-    </div>
-    <h2>Informations Personnelles</h2>
-    <div class="info-item">
-        <i class="fas fa-envelope"></i>
-        <p style="color : #3a3a3a;">{{ user.email }}</p>
-    </div>
-    <div class="info-item">
-        <i class="fas fa-phone-alt"></i>
-        <p style="color : #3a3a3a;">+ 33 {{ user.numeroTelephone }}</p>
-    </div>
-    <div class="info-item">
-        <i class="fas fa-map-marker-alt"></i>
-        <p style="color : #3a3a3a;">{{ user.adressePostale }} , {{ user.codePostal }} {{ user.ville }}</p>
-    </div>
-
+    <div class="info-section">
+        <div class="profile-actions-right">
+            <a href="{{ path('account_edit') }}" class="btn btn-primary" style="text-decoration:none;color:#0059ff;">Modifier mes informations</a>
+            <a href="{{ path('account_change_password') }}" class="btn btn-secondary" style="text-decoration:none;color:#0059ff;">Changer mon mot de passe</a>
+        </div>
+        <h2>Informations Personnelles</h2>
+        <div class="info-item">
+            <i class="fas fa-envelope"></i>
+            <p style="color : #3a3a3a;">{{ user.email }}</p>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-phone-alt"></i>
+            <p style="color : #3a3a3a;">+ 33 {{ user.numeroTelephone }}</p>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <p style="color : #3a3a3a;">{{ user.adressePostale }} , {{ user.codePostal }} {{ user.ville }}</p>
+        </div>
 
         <!-- Informations Professionnelles -->
         <h2>Informations Professionnelles</h2>
@@ -287,12 +328,19 @@ nav h1 {
             <p style="color : #3a3a3a;">{{ user.profession }}</p>
         </div>
     </div>
-        <div class="text-center">
-            <button style="background-color:red;padding:5px;border:1px solid red;"><a href="{{ path('app_account_delete') }}" class="btn btn-danger" style="text-decoration:none;color:white;background-color: red;">Supprimer le compte</a></button>
-            <button style="background-color:black;border:1px solid black;"><a href="{{ path('app_logout') }}" class="btn btn-secondary" style="text-decoration:none;background-color:black;color:white;">Se déconnecter</a></button>
-        </div>
+    
+    <div class="text-center">
+        <!-- Bouton Supprimer le compte -->
+        <a href="{{ path('app_account_delete') }}" class="btn-professional btn-professional-danger">
+            <i class="fas fa-trash-alt"></i> Supprimer le compte
+        </a>
+        
+        <!-- Bouton Se déconnecter -->
+        <a href="{{ path('app_logout') }}" class="btn-professional btn-professional-dark">
+            <i class="fas fa-sign-out-alt"></i> Se déconnecter
+        </a>
+    </div>
 </div>
-
 
 <script>
     function previewProfilePicture(event) {

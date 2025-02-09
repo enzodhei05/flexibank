@@ -4,6 +4,7 @@ namespace App\EventListener;
 
 use App\Entity\User;
 use Doctrine\ORM\Event\PrePersistEventArgs;
+use Symfony\Component\Uid\Uuid;
 
 class UserListener
 {

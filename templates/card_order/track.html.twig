@@ -1,0 +1,24 @@
+{# templates/card_order/track.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Suivi de la commande
+{% endblock %}
+
+{% block body %}
+  <h1>Suivi de ma commande de carte</h1>
+
+  {% if cardOrder %}
+    <p>
+      <strong>Type de carte :</strong> {{ cardOrder.cardType }}
+    </p>
+    <p>
+      <strong>Statut :</strong> {{ cardOrder.status }}
+    </p>
+    <p>
+      <strong>Date de commande :</strong> {{ cardOrder.orderDate|date('d/m/Y H:i') }}
+    </p>
+  {% else %}
+    <p>{{ message }}</p>
+  {% endif %}
+{% endblock %}

@@ -199,14 +199,12 @@ body {
     width: 180px; /* Taille fixe plus petite */
 }
 
-
-
 .footer h4 {
     margin-bottom: 15px;
     font-weight: bold;
 }
 
-.footer p,
+
 .footer a {
     font-size: 1rem;
     color: #c5c5c5;

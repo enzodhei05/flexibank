@@ -1,83 +1,120 @@
 <?php
 
-// src/Entity/CardOrder.php
-
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: "App\Repository\CardOrderRepository")]
+#[ORM\Entity()]
 class CardOrder
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $customerName = null;
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $userEmail = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $customerEmail = null;
+    #[ORM\Column(type: 'string', length: 50)]
+    private ?string $cardType = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $cardCategory = null;
+    #[ORM\Column(type: 'string', length: 19)]
+    private ?string $cardNumber = null;
+
+    #[ORM\Column(type: 'string', length: 3)]
+    private ?string $ccv = null;
+
+    #[ORM\Column(type: 'date')]  // Ou 'datetime' si vous avez besoin d'un timestamp complet
+    private ?\DateTimeInterface $expirationDate = null;
+
+    #[ORM\Column(type: 'string', length: 20)]
+    private ?string $status = 'pending';
 
     #[ORM\Column(type: 'datetime')]
-    private ?\DateTimeInterface $createdAt = null;
+    private ?\DateTimeInterface $orderDate = null;
 
-    public function __construct()
+    // Getter et setter pour le numéro de carte, le CCV et la date d'expiration
+    public function getCardNumber(): ?string
     {
-        $this->createdAt = new \DateTime();
+        return $this->cardNumber;
     }
 
-    // Getters et Setters pour chaque propriété
+    public function setCardNumber(string $cardNumber): self
+    {
+        $this->cardNumber = $cardNumber;
+        return $this;
+    }
+
+    public function getCcv(): ?string
+    {
+        return $this->ccv;
+    }
+
+    public function setCcv(string $ccv): self
+    {
+        $this->ccv = $ccv;
+        return $this;
+    }
+
+    // Modifier getExpirationDate pour retourner un objet DateTime
+    public function getExpirationDate(): ?\DateTimeInterface
+    {
+        return $this->expirationDate;
+    }
+
+    // Modifier setExpirationDate pour accepter un objet DateTime
+    public function setExpirationDate(\DateTimeInterface $expirationDate): self
+    {
+        $this->expirationDate = $expirationDate;
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCustomerName(): ?string
+    public function getUserEmail(): ?string
     {
-        return $this->customerName;
+        return $this->userEmail;
     }
 
-    public function setCustomerName(string $customerName): static
+    public function setUserEmail(string $userEmail): self
     {
-        $this->customerName = $customerName;
+        $this->userEmail = $userEmail;
         return $this;
     }
 
-    public function getCustomerEmail(): ?string
+    public function getCardType(): ?string
     {
-        return $this->customerEmail;
+        return $this->cardType;
     }
 
-    public function setCustomerEmail(string $customerEmail): static
+    public function setCardType(string $cardType): self
     {
-        $this->customerEmail = $customerEmail;
+        $this->cardType = $cardType;
         return $this;
     }
 
-    public function getCardCategory(): ?string
+    public function getStatus(): ?string
     {
-        return $this->cardCategory;
+        return $this->status;
     }
 
-    public function setCardCategory(string $cardCategory): static
+    public function setStatus(string $status): self
     {
-        $this->cardCategory = $cardCategory;
+        $this->status = $status;
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getOrderDate(): ?\DateTimeInterface
     {
-        return $this->createdAt;
+        return $this->orderDate;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): static
+    public function setOrderDate(\DateTimeInterface $orderDate): self
     {
-        $this->createdAt = $createdAt;
+        $this->orderDate = $orderDate;
         return $this;
     }
 }

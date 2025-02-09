@@ -3,21 +3,25 @@
 {% block title %}Étape 1: Pays de résidence{% endblock %}
 
 {% block body %}
+<!-- Styles Select2 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
 <style>
 /* Style général */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #1e1e1e;
-    color: #333;
+    color: #ffffff;
     margin: 0;
     padding: 0;
 }
 
 nav {
-    background-color: #1e1e1e; /* Fond blanc pour contraster avec le fond général */
+    background-color: #1e1e1e;
     padding: 20px 30px;
-    color: #333333; /* Gris foncé pour une meilleure lisibilité */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Légère ombre pour séparation */
+    color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -26,9 +30,9 @@ nav {
 nav h1 {
     margin: 0;
     font-size: 28px;
-    margin-right:40px;
+    margin-right: 40px;
     font-weight: bold;
-    color: #007BFF; /* Bleu pour mettre en avant le titre */
+    color: #007BFF;
 }
 
 .back-arrow {
@@ -38,19 +42,25 @@ nav h1 {
     background-color: transparent;
     border: none;
     color: #007BFF;
-    text-decoration:none;
+    text-decoration: none;
     cursor: pointer;
     padding: 10px;
     transition: color 0.3s ease;
 }
 
 nav .back-arrow:hover {
-    color: #0056b3; /* Couleur plus foncée au survol */
+    color: #0056b3;
 }
 
 nav .back-arrow i {
     margin-right: 8px;
-    font-size: 18px; /* Taille de l'icône */
+    font-size: 18px;
+}
+
+/* Forcer la liste déroulante à s'afficher en dessous */
+.select2-container--open .select2-dropdown {
+    top: 100% !important;
+    bottom: auto !important;
 }
 
 /* Formulaire */
@@ -58,7 +68,7 @@ form {
     max-width: 400px;
     margin: -15px auto;
     padding: 20px;
-    background-color:#1e1e1e;
+    background-color: #1e1e1e;
     border-radius: 8px;
 }
 
@@ -71,33 +81,88 @@ form label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
-    color: #555;
+    color: #ffffff;
 }
 
-form input,
 form select {
     width: 100%;
     padding: 10px;
     font-size: 1rem;
-    border: 1px solid #ccc;
+    border: 1px solid #007BFF;
     border-radius: 5px;
     box-sizing: border-box;
-    color:white;
-    background-color:#1e1e1e;
+    color: white;
+    background-color:black;
+    appearance: none;
 }
 
-form input:focus,
-form select:focus {
-    border-color:  #007BFF;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 86, 179, 0.2);
+/* Style de la liste déroulante avec Select2 */
+.select2-container--default .select2-selection--single {
+    background-color: #1e1e1e;
+    border: 1px solid #007BFF;
+    border-radius: 5px;
+    color: white;
+    height: 40px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: white;
+    padding-left: 20px; /* Espace pour le drapeau */
+    display: flex;
+    align-items: center; /* Aligner le texte et l'image */
+    margin-top:7px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 8px;
+    right: 10px;
+}
+
+/* Barre de recherche Select2 en noir */
+.select2-container--default .select2-search--dropdown {
+    background-color: #1e1e1e !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered img {
+    width: 26px !important;
+    height: 16px !important;
+    margin-right: 8px;
+    margin-top: 0; /* Centrer verticalement */
+    vertical-align: middle; /* Centrer verticalement */
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    background-color: #1e1e1e !important;
+    color: white !important;
+    border: 1px solid #007BFF !important;
+}
+
+/* Options de la liste déroulante */
+.select2-results__option {
+    display: flex;
+    align-items: center;
+    background-color: #1e1e1e;
+    color: white;
+}
+
+/* Option sélectionnée */
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #242424 !important; /* Changer le fond sélectionné en gris */
+    color: white !important;
+}
+
+/* Ajout des drapeaux dans la liste */
+.select2-results__option img {
+    width: 20px;
+    height: 15px;
+    margin-right: 10px;
 }
 
 /* Bouton */
 button[type="submit"] {
     display: block;
-    margin: 20px auto 0; /* Centre le bouton horizontalement et ajoute un espace au-dessus */
-    width: 50%; /* Largeur du bouton */
+    margin: 20px auto 0;
+    width: 50%;
     padding: 12px;
     font-size: 1rem;
     font-weight: bold;
@@ -118,26 +183,43 @@ button[type="submit"]:active {
     background-color: #003366;
     transform: translateY(0);
 }
+
+/* Titre */
 h1 {
     text-align: center;
     font-size: 2rem;
     color: white;
-    margin-top: 180px;
+    margin-top: 125px;
 }
 </style>
 
 <nav>
     <a href="{{ path('app_home') }}" class="back-arrow">
-    <i class="fas fa-arrow-left"></i> Retour
-</a>
-
+        <i class="fas fa-arrow-left"></i> Retour
     </a>
     <h1>Flexibank</h1>
-    
 </nav>
+
 <h1>Commençons</h1>
-    {{ form_start(form) }}
-        {{ form_widget(form.paysDeResidence, {'attr': {'placeholder': 'Veuillez saisir votre pays de résidence'}}) }}
-        <button type="submit">Suivant</button>
-    {{ form_end(form) }}
+
+{{ form_start(form) }}
+    {{ form_widget(form.paysDeResidence, {'attr': {'class': 'country-select'}}) }}
+    <button type="submit">Suivant</button>
+{{ form_end(form) }}
+
+<!-- Script Select2 pour afficher les drapeaux -->
+<script>
+    $(document).ready(function() {
+        $('.country-select').select2({
+            templateResult: formatCountry,
+            templateSelection: formatCountry
+        });
+
+        function formatCountry(country) {
+            if (!country.id) return country.text;
+            return $('<span><img src="https://flagcdn.com/w40/' + country.id.toLowerCase() + '.png" class="flag-icon" /> ' + country.text + '</span>');
+        }
+    });
+</script>
+
 {% endblock %}

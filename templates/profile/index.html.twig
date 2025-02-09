@@ -25,11 +25,27 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
+    .back-button {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background-color: #002d72;
+        color: white;
+        padding: 10px 15px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 1em;
+        font-weight: bold;
+    }
+    .back-button:hover {
+        background-color: #0056b3;
+    }
+    
     nav h1 {
         font-size: 1.8em;
         margin: 0;
     }
-
+    
     .container {
         display: flex;
         justify-content: space-between;
@@ -67,12 +83,42 @@
         font-size: 1.2em;
     }
 
-    .profile-img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        margin-right: 10px;
-    }
+    .profile-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Aligne à droite */
+    margin-right: 20px; /* Ajuste si nécessaire */
+}
+
+.profile-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+}
+
+.user-info span {
+    font-weight: bold;
+}
+
+.user-id {
+    font-size: 0.8em;
+    color: #007bff;
+    margin-top: 2px;
+}
+
+.user-id p {
+    color: white;
+    margin: 0;
+}
+
 
     .dashboard {
         background-color: #fff;
@@ -203,17 +249,20 @@
     <a href="javascript:history.back()" class="back-button">
         ← Retour
     </a>
-    <div style="display: flex; align-items: center; margin-left: 1200px;">
-        <img src="{{ asset('images/iconprofile.jpg') }}" alt="Profil" class="profile-img" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 10px;">
-        
-        <div style="display: flex; flex-direction: column;">
-            <span style="font-weight: bold;">{{ app.user.nom|upper }} {{ app.user.prenom|capitalize }}</span>
-            {% if app.user.codeClient %}
-                <span style="font-size: 0.8em; color: #007bff; margin-top: 2px;">
-                    <p style="color:white; margin: 0;">ID: {{ app.user.codeClient }}</p>
-                </span>
-            {% endif %}
-        </div>
+    <div class="profile-container">
+    <img src="{{ asset('images/iconprofile.jpg') }}" alt="Profil" class="profile-img">
+    
+    <div class="user-info">
+        <span>{{ app.user.nom|upper }} {{ app.user.prenom|capitalize }}</span>
+        {% if app.user.codeClient %}
+            <span class="user-id">
+                <p>ID: {{ app.user.codeClient }}</p>
+            </span>
+        {% endif %}
+    </div>
+</div>
+
+
     </div>
 </nav>
 

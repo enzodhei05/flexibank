@@ -9,11 +9,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class StaticPageController extends AbstractController
 {
-    
-    #[Route(path: '/conditions', name: 'conditions')]
-    public function conditions(): Response
+    #[Route(path: '/conditionsgénérales', name: 'conditionsgénérales')]
+    public function conditionsgénérales(): Response
     {
-        return $this->render('pages/conditions.html.twig');
+        return $this->render('pages/conditionsgénérales.html.twig');
     }
 
     #[Route(path: '/politique', name: 'politique')]
@@ -23,23 +22,41 @@ class StaticPageController extends AbstractController
         return $this->render('pages/politique.html.twig');
     }
 
-    #[Route(path: '/aide', name: 'aide')]
+    #[Route(path: '/mentions', name: 'mentions')]
 
-    public function aide(): Response
+    public function mentions(): Response
     {
-        return $this->render('pages/aide.html.twig');
+        return $this->render('pages/mentions.html.twig');
     }
-    
-    #[Route(path: '/cookie', name: 'cookie')]
+
+    #[Route(path: '/cookle', name: 'cookie')]
 
     public function cookie(): Response
     {
         return $this->render('pages/cookie.html.twig');
     }
-
-    #[Route(path: '/home', name: 'home')]
-    public function home(): Response
+    
+    #[Route(path: '/propos', name: 'propos')]
+    public function propos(): Response
     {
-        return $this->render('pages/home.html.twig');
+        return $this->render('pages/propos.html.twig');
+    }
+
+    #[Route(path: '/nosservices', name: 'nosservices')]
+    public function nosservices(): Response
+    {
+        return $this->render('pages/nosservices.html.twig');
+    }
+
+    #[Route(path: '/faq', name: 'faq')]
+    public function faq(): Response
+    {
+        return $this->render('pages/faq.html.twig');
+    }
+
+    #[Route(path: '/contact', name: 'contact')]
+    public function contact(): Response
+    {
+        return $this->render('pages/contact.html.twig');
     }
 }

@@ -1,0 +1,25 @@
+{# templates/card_order/dashboard.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Tableau de bord
+{% endblock %}
+
+{% block body %}
+  <h1>Tableau de bord</h1>
+
+  <p>Bienvenue, {{ app.user.nom|upper }} {{ app.user.prenom|capitalize }} !</p>
+
+  <h2>Gestion des cartes bancaires</h2>
+  <ul>
+    <li>
+      <a href="{{ path('order_card') }}">Commander une nouvelle carte</a>
+    </li>
+    <li>
+      <a href="{{ path('track_card_order') }}">Suivre ma demande de carte</a>
+    </li>
+    <li>
+      <a href="{{ path('app_view_card') }}">Voir ma carte bancaire</a>
+    </li>
+  </ul>
+{% endblock %}

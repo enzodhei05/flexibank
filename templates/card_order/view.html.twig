@@ -1,0 +1,12 @@
+{% if cardOrder %}
+  <h1>Commande de carte</h1>
+  <p>Email de l'utilisateur : {{ cardOrder.userEmail }}</p>
+  <p>Type de carte : {{ cardOrder.cardType }}</p>
+  <p>Numéro de la carte : {{ cardOrder.cardNumber }}</p>
+  <p>CCV : {{ cardOrder.ccv }}</p>
+  <p>Date d'expiration : {{ cardOrder.expirationDate|date('m/Y') }}</p>
+  <p>Status de la commande : {{ cardOrder.status }}</p>
+  <p>Date de la commande : {{ cardOrder.orderDate|date('d/m/Y') }}</p>
+{% else %}
+  <p>Aucune commande de carte trouvée.</p>
+{% endif %}

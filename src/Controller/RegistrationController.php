@@ -55,7 +55,8 @@ class RegistrationController extends AbstractController
             $session->set('user_id', $user->getId());
 
             // Rediriger vers la page de conversion en client
-            return $this->redirectToRoute('app_login');  // redirection vers le formulaire client
+            return $this->redirectToRoute('app_login', ['confirmation' => true]);
+
         }
 
         return $this->render('registration/register.html.twig', [

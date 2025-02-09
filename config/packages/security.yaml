@@ -8,41 +8,32 @@ security:
         users_in_database:
             entity:
                 class: App\Entity\User
-                property: email  # Assurez-vous d'utiliser la propriété correcte (email ou username)
+                property: email  # Utilisation de "email" ici comme identifiant
 
     firewalls:
-        # Désactivation de la sécurité pour certaines routes de développement
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        # Configuration du firewall principal
         main:
             lazy: true
             provider: users_in_database
-            
-            # Configuration du formulaire de connexion
-            
-            # Configuration de la déconnexion
-            logout:
-                path: app_logout
-                # where to redirect after logout
-                # target: app_any_route
 
-            # Configuration "remember me" pour la connexion persistante
-            remember_me:
-                secret: '%kernel.secret%'
-                lifetime: 604800  # Durée de vie en secondes (1 semaine ici)
-                path: /
             form_login:
                 login_path: app_login
                 check_path: app_login
                 enable_csrf: true
-                # always_remember_me: true  # Décommentez pour toujours activer le "remember me"
 
-    # Contrôle d'accès pour les différentes routes
+            logout:
+                path: app_logout
 
-    
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800  # 1 semaine
+                path: /
 
-    
-    
+    access_control:
+        - { path: ^/dashboard, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/order-card, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/track-card, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/view-card, roles: IS_AUTHENTICATED_FULLY }

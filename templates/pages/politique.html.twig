@@ -1,123 +1,108 @@
-<!DOCTYPE html>
-<html lang="fr">
+{% extends 'base.html.twig' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Politique de Confidentialité</title>
+{% block title %}Politique de Confidentialité - Flexibank{% endblock %}
+
+{% block body %}
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            line-height: 1.6;
             background-color: #f4f4f4;
             color: #333;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            margin: 0;
+            padding: 0;
         }
 
-        header {
-            background: black;
-            color: #fff;
-            padding: 1em 0;
-            text-align: center;
-        }
-
-        nav {
-            background: #333;
-            color: #fff;
-            padding: 1em;
-            text-align: center;
-        }
-
-        nav a {
+        .hero {
+            background-color: #002d72;
             color: white;
-            margin: 0 15px;
+            text-align: center;
+            padding: 5px 20px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #002d72;
+            color: white;
+            padding: 10px 15px;
             text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
             text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .section {
+            color: #007bff;
             margin-bottom: 20px;
         }
 
-        .section h2 {
-            margin-bottom: 10px;
+        h2 {
+            color: #007bff;
+            font-size: 1.4em;
+            margin-top: 20px;
         }
 
-        footer {
-            background-color: black;
-            color: white;
-            text-align: center;
-            padding: 1rem 0;
-            width: 100%;
-            bottom: 0;
+        p {
+            font-size: 1em;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .section-title {
+            margin-top: 30px;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #004085;
         }
     </style>
-</head>
 
-<body>
-    <header>
-        <h1>Politique de confidentialité</h1>
-    </header>
-    <nav>
-        <a href="/FlexiBank/site01/FlexiBank/index.html">Accueil</a>
-        <a href="cookie.html">Cookie Policy</a>
-        <a href="contact.html">Contact</a>
-    </nav>
-    <div class="section">
-        <h2>Collecte des Informations</h2>
-        <p>Nous collectons des informations lorsque vous vous inscrivez sur notre site, lorsque vous vous connectez à
-            votre compte, faites un achat, participez à un concours et/ou lorsque vous vous déconnectez. Les
-            informations collectées incluent votre nom, votre adresse e-mail, votre numéro de téléphone et/ou votre
-            carte de crédit.</p>
+    <div class="hero">
+        <a href="javascript:history.back()" class="back-button">
+            ← Retour
+        </a>
+        <h1>Politique de Confidentialité</h1>
+        <p>Chez Flexibank, la confidentialité de vos données est une priorité. Cette politique explique comment nous collectons, utilisons et protégeons vos informations personnelles.</p>
     </div>
-    <div class="section">
-        <h2>Utilisation des Informations</h2>
-        <p>Toute les informations que nous recueillons auprès de vous peuvent être utilisées pour :</p>
-        <ul>
-            <li>Personnaliser votre expérience et répondre à vos besoins individuels</li>
-            <li>Fournir un contenu publicitaire personnalisé</li>
-            <li>Améliorer notre site Web</li>
-            <li>Améliorer le service client et vos besoins de prise en charge</li>
-            <li>Vous contacter par e-mail</li>
-            <li>Administrer un concours, une promotion, ou une enquête</li>
-        </ul>
-    </div>
-    <div class="section">
-        <h2>Confidentialité des Informations</h2>
-        <p>Nous sommes les seuls propriétaires des informations recueillies sur ce site. Vos informations personnelles
-            ne seront pas vendues, échangées, transférées, ou données à une autre société pour n'importe quelle raison,
-            sans votre consentement, en dehors de ce qui est nécessaire pour répondre à une demande et/ou une
-            transaction, comme par exemple pour expédier une commande.</p>
-    </div>
-    <div class="section">
-        <h2>Divulgation à des Tiers</h2>
-        <p>Nous ne vendons, n'échangeons et ne transférons pas vos informations personnelles identifiables à des tiers.
-            Cela ne comprend pas les tierce parties de confiance qui nous aident à exploiter notre site Web ou à mener
-            nos affaires, tant que ces parties conviennent de garder ces informations confidentielles.</p>
-    </div>
-    <div class="section">
-        <h2>Protection des Informations</h2>
-        <p>Nous mettons en œuvre une variété de mesures de sécurité pour préserver la sécurité de vos informations
-            personnelles. Nous utilisons un cryptage à la pointe de la technologie pour protéger les informations
-            sensibles transmises en ligne. Nous protégeons également vos informations hors ligne. Seuls les employés qui
-            ont besoin d'effectuer un travail spécifique (par exemple, la facturation ou le service client) ont accès
-            aux informations personnelles identifiables. Les ordinateurs et serveurs utilisés pour stocker des
-            informations personnelles identifiables sont conservés dans un environnement sécurisé.</p>
-    </div>
-    <div class="section">
-        <h2>Consentement</h2>
-        <p>En utilisant notre site, vous consentez à notre politique de confidentialité.</p>
-    </div>
-    <footer>
-        <p>&copy; 2024 FlexiBank. Tous droits réservés.</p>
-    </footer>
-</body>
 
-</html>
+    <div class="container">
+        <h2>1. Collecte d'informations</h2>
+        <p>Nous collectons des informations personnelles lorsque vous vous inscrivez sur notre plateforme, effectuez des transactions, ou interagissez avec nos services. Ces informations peuvent inclure votre nom, adresse e-mail, informations bancaires et autres données nécessaires à la fourniture de nos services.</p>
+
+        <h2>2. Utilisation des informations</h2>
+        <p>Les informations que nous collectons sont utilisées pour gérer votre compte, fournir des services personnalisés, améliorer nos fonctionnalités, et vous informer des mises à jour ou offres spéciales. Nous ne partageons vos informations qu'avec des partenaires de confiance dans le but de mieux servir vos besoins.</p>
+
+        <h2>3. Sécurité des données</h2>
+        <p>Nous mettons en œuvre des mesures de sécurité avancées pour protéger vos données personnelles contre tout accès non autorisé. Cependant, nous vous encourageons également à prendre les mesures nécessaires pour protéger vos informations de connexion.</p>
+
+        <h2>4. Partage des informations</h2>
+        <p>Nous ne vendons, ne louons, ni ne partageons vos informations personnelles à des fins commerciales sans votre consentement explicite, sauf si la loi l'exige. Dans certains cas, nous pouvons être amenés à partager vos données avec des prestataires de services qui nous aident à gérer nos opérations.</p>
+
+        <h2>5. Vos droits</h2>
+        <p>Conformément à la législation sur la protection des données, vous avez le droit d'accéder à vos informations personnelles, de les corriger ou de demander leur suppression. Vous pouvez exercer vos droits en nous contactant directement.</p>
+
+        <h2>6. Modifications de la politique</h2>
+        <p>Nous nous réservons le droit de modifier cette politique de confidentialité à tout moment. Toute mise à jour sera publiée sur cette page, et la date de la dernière révision sera indiquée au bas du document.</p>
+
+        <h2>7. Cookies</h2>
+        <p>Nous utilisons des cookies pour améliorer votre expérience en ligne, personnaliser les services, et analyser l'utilisation de notre site. Vous pouvez ajuster vos préférences de cookies dans les paramètres de votre navigateur.</p>
+
+        <h2>8. Contact</h2>
+        <p>Si vous avez des questions concernant cette politique de confidentialité, veuillez nous contacter <a href="{{ path('contact') }}">ici</a>.</p>
+    </div>
+{% endblock %}

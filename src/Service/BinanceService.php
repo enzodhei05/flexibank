@@ -30,6 +30,8 @@ class BinanceService
 
         // Construct the URL with the signature
         $url = 'https://api.binance.com/api/v3/account?' . $queryString . '&signature=' . $signature;
+        //echo "zMif1R7js8PGYtp5yQ89jxmRmP4Mbnf16Jixrg0NF8PfXIdPOWSohJq8QTpDuj3i";
+        //die;
 
         try {
             $response = $this->httpClient->request(
@@ -37,7 +39,7 @@ class BinanceService
                 $url,
                 [
                     'headers' => [
-                        'X-MBX-APIKEY' => $this->apiKey,
+                        'X-MBX-APIKEY' => "zMif1R7js8PGYtp5yQ89jxmRmP4Mbnf16Jixrg0NF8PfXIdPOWSohJq8QTpDuj3i",
                     ],
                 ]
             );

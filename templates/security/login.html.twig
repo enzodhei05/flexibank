@@ -1,3 +1,4 @@
+
 <style>
     body {
         background-color: #1e1e1e;
@@ -12,55 +13,19 @@
 
     .wrapper {
         display: flex;
-        width: 80%;
-        max-width: 1200px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 400px;
         background-color: #1e1e1e;
         border-radius: 20px;
         overflow: hidden;
-    }
-
-    .left-section {
-        flex: 1;
         padding: 40px;
-        background-color: #1e1e1e;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .left-section h1 {
-        font-size: 2.1em;
-        color: #f2f2f2;
-        margin: 0;
-        opacity: 0; /* Initial state for animation */
-        transform: translateY(20px); /* Slight offset for animation */
-        animation: fadeInUp 1.5s ease-out forwards; /* Trigger animation */
-    }
-
-    @keyframes fadeInUp {
-        0% {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        100% {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .right-section {
-        flex: 1;
-        padding: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
 
     .container {
         width: 100%;
-        max-width: 400px;
     }
 
     input[type="email"],
@@ -81,12 +46,6 @@
         border-color: #6699ff;
         background-color: #333;
         outline: none;
-    }
-
-    input::placeholder {
-        color: #aaa;
-        font-size: 1em;
-        font-style: italic;
     }
 
     button {
@@ -111,19 +70,18 @@
         transform: translateY(1px);
     }
 
-.checkbox {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Ajoute un espacement entre la case à cocher et le label */
-    margin-top: 20px; /* Maintient un espace au-dessus de la case à cocher */
-}
+    .checkbox {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
 
-.checkbox label {
-    margin: 0; /* Supprime tout espacement par défaut autour du label */
-    color: #ddd; /* Harmonise la couleur avec le reste du formulaire */
-    font-size: 1em; /* Uniformise la taille du texte */
-}
-
+    .checkbox label {
+        margin: 0;
+        color: #ddd;
+        font-size: 1em;
+    }
 
     .alert {
         color: #e74c3c;
@@ -135,25 +93,25 @@
     }
 
     .form-title {
-    color: #f2f2f2; /* Couleur blanche pour correspondre au design global */
-    font-size: 1.5em; /* Taille légèrement plus grande */
-    margin-bottom: 20px; /* Espacement en dessous */
-    text-align: center; /* Centré */
-}
+        color: #007bff;
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        text-align: center;
+    }
 
-.header {
-    position: absolute;
-    top: 25px;
-    left: 35px;
-}
+    .header {
+        position: absolute;
+        top: 25px;
+        left: 35px;
+    }
 
-.logo {
-    color: #f2f2f2; /* Couleur blanche */
-    font-size: 1.8em; /* Taille du texte */
-    font-weight: bold; /* Gras pour un effet de logo */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Légère ombre pour le style */
-    margin: 0;
-}
+    .logo {
+        color: #007bff;
+        font-size: 1.8em;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        margin: 0;
+    }
 </style>
 
 <div class="header">
@@ -161,41 +119,41 @@
 </div>
 
 <div class="wrapper">
-    <div class="left-section">
-        <h1>Bon retour parmi nous !</h1>
-    </div>
-    <div class="right-section">
-        <div class="container">
-            <form method="post">
-                {% if error %}
-                    <div class="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
+    <!-- Texte ajusté selon le cas -->
+    <h1 class="form-title">
+        {% if confirmation %}
+            Connectez-vous pour finaliser l'inscription
+        {% else %}
+            Connectez-vous
+        {% endif %}
+    </h1>
+    <div class="container">
+        <form method="post">
+            {% if error %}
+                <div class="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
 
-                {% if app.user %}
-                    <div class="mb-3">
-                        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-                    </div>
-                {% endif %}
+            {% if app.user %}
+                <div class="mb-3">
+                    Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                </div>
+            {% endif %}
 
-                <h2 class="form-title">Connectez-vous</h2>
+            <input type="email" value="{{ last_username }}" name="_username" id="username" placeholder="Email" autocomplete="email" required autofocus>
 
+            <input type="password" name="_password" id="password" placeholder="Password" autocomplete="current-password" required>
 
-                <input type="email" value="{{ last_username }}" name="_username" id="username" placeholder="Email" autocomplete="email" required autofocus>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                <input type="password" name="_password" id="password" placeholder="Password" autocomplete="current-password" required>
+            <button type="submit">
+                Se connecter
+            </button>
 
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-                <button type="submit">
-                    Sign in
-                </button>
-
-                <div class="checkbox">
+            <div class="checkbox">
                 <input type="checkbox" name="_remember_me" id="_remember_me">
                 <label for="_remember_me">Se souvenir de moi</label>
-                </div>
+            </div>
 
-            </form>
-        </div>
+        </form>
     </div>
 </div>
