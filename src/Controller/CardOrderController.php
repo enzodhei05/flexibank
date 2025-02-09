@@ -37,7 +37,7 @@ class CardOrderController extends AbstractController
     {
         $user = $this->getUser();
         if (!$user) {
-            return $this->redirectToRoute('track_card_order');
+            return $this->redirectToRoute('order_card');
         }
 
         $userEmail = $user->getEmail();
@@ -54,7 +54,7 @@ class CardOrderController extends AbstractController
 
         if ($existingOrder) {
             $this->addFlash('error', 'Vous avez déjà une commande de carte en attente.');
-            return $this->redirectToRoute('track_card_order');
+            return $this->redirectToRoute('order_card');
         }
 
         // Créer une nouvelle commande de carte
@@ -68,7 +68,6 @@ class CardOrderController extends AbstractController
         // **Passage au format string pour l'expiration**
         $expirationDate = $this->cardGenerator->generateExpirationDate();
         $cardOrder->setExpirationDate($expirationDate);
-
 
         // Créer et traiter le formulaire
         $form = $this->createForm(CardOrderType::class, $cardOrder);
